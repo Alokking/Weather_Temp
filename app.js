@@ -27,13 +27,16 @@ app.post("/", function(req,res){
             const weatherData = JSON.parse(data)
             var temp = weatherData.main.temp;
             var weatherDescription = weatherData.weather[0].description;
-            const icon = weatherData.weather[0].icon;
+            // const icon = weatherData.weather[0].icon;
             // const imageURL = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
             const show1 = "The temperature in "+query+" is "+ temp +" deg C";
             const show2 = "The weather is currently " + weatherDescription;
             res.render("list", {show1: show1, show2: show2});
 
-        });
+        }).fail(() => {
+            alert("City doesn't Exist!!");
+            $("#cityName").val("");
+          });
     });
 });
 
